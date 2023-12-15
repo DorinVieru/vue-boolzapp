@@ -74,12 +74,15 @@
                                     <div class="d-flex px-3 py-1 cursor-pointer align-items-center" :class="currentContact == index ? 'active bg-grey' : ''">
         
                                         <!-- TESTO LISTA CONTATTI -->
-                                        <div>
+                                        <div class="col-2">
                                             <img :src="contact.avatar" :alt="contact.name"> 
                                         </div>
-                                        <div class="px-2">
+                                        <div class=" col-9 px-2">
                                             <span class="fw-semibold">{{ contact.name }}</span>
                                             <p class="last-message">{{ viewLastMessage(index) }}</p>
+                                        </div>
+                                        <div class="col-1 fw-lighter hour">
+                                            <span>12:00</span>
                                         </div>
                                 </li>
                             </ul>
@@ -94,7 +97,10 @@
                             <!-- IMMAGINE, NOME CONTATTO E ICONE -->
                             <div class="d-flex align-items-center p-2">
                                 <img :src="contacts[currentContact].avatar" :alt="contacts[currentContact].name">
-                                <h3 class="px-3">{{ contacts[currentContact].name }}</h3>
+                                <div>
+                                    <h3 class="px-3 mb-0">{{ contacts[currentContact].name }}</h3>
+                                    <span class="ultimo-accesso px-3">Ultimo accesso oggi alle: 15:00</span>
+                                </div>
                             </div>
                             <div>
                                 <ul class="list-unstyled d-flex pt-3 px-3">
@@ -148,6 +154,7 @@
 
     <!-- SCRIPT JS -->
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/luxon@3.4.4/build/global/luxon.min.js"></script>
     <script type="text/javascript" src="./js/script.js"></script>
 </body>
 

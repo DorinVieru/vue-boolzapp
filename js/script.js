@@ -208,6 +208,7 @@ createApp({
         viewLastMessage(index){
             return this.contacts[index].messages[this.contacts[index].messages.length -1].message.slice(0,30) + " " + "...";
         },
+        
     }
 
     // CHIUSURA createApp CON .MOUNT("ID")

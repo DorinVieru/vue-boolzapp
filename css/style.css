@@ -15,6 +15,11 @@ body{
     background-color: #EAEAEA;
 }
 
+.ultimo-accesso{
+    color: gray;
+    font-size: 13px;
+}
+
 /* IMG */
 img{
     width: 60px;
@@ -42,6 +47,10 @@ main {
 
 .bg-blue-notifica{
     background-color: #8EDAFC;
+}
+
+.hour{
+    font-size: 12px;
 }
 
 
