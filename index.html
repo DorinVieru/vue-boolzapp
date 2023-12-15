@@ -58,7 +58,7 @@
                         <div class="input-group mt-1 mb-3">
                             <span class="input-group-text"><i class="fa-solid fa-magnifying-glass"></i></span>
                             <div class="form-floating">
-                                <input type="text" class="form-control" id="floatingInputGroup1" placeholder="Cerca o inizia una nuova chat">
+                                <input type="text" class="form-control" placeholder="Cerca o inizia una nuova chat" v-model="search" @keyup="findContact">
                                 <label for="floatingInputGroup1">Cerca o inizia una nuova chat</label>
                             </div>
                         </div>
@@ -68,7 +68,7 @@
                             <!-- LISTA VERA E PRORPIA -->
                             <ul class="list-unstyled">
                                 <li v-for="(contact, index) in contacts" 
-                                    @click="showChat(index)">
+                                    @click="showChat(index)" v-show="contact.visible">
         
                                     <!-- CORPO DELLA LISTA -->
                                     <div class="d-flex px-3 py-1 cursor-pointer align-items-center" :class="currentContact == index ? 'active bg-grey' : ''">

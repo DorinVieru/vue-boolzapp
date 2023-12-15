@@ -10,6 +10,7 @@ createApp({
             name_profile: "Dorin",
             currentContact: 0,
             new_message: "",
+            search: "",
             // ARRAT DEI CONTATTI
             contacts: [
                 {
@@ -241,6 +242,18 @@ createApp({
     
                 this.new_message = '';
             }
+        },
+
+        // FUNZIONE PER RICERCARE UN CONTATTO
+        findContact() {
+            this.contacts.forEach((element) => {
+                if (element.name.toLowerCase().includes(this.search.toLowerCase())) {
+                    element.visible = true;
+                }
+                else {
+                    element.visible = false;
+                }
+            });
         },
     }
 
