@@ -136,7 +136,7 @@
                                     </div>
                                     <div class="col-10">
                                         <!-- CAMPO INPUT -->
-                                        <input type="text" class="form-control" placeholder="Scrivi un nuovo messaggio">
+                                        <input type="text" class="form-control" placeholder="Scrivi un nuovo messaggio" v-model="new_message" @keyup.enter="addMessage()">
                                     </div>
                                     <!-- ICON MICROPHONE -->
                                     <div class="col-1 ps-0 text-center">

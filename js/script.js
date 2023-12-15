@@ -9,6 +9,7 @@ createApp({
             img_profile: "./img/avatar_io.png",
             name_profile: "Dorin",
             currentContact: 0,
+            new_message: "",
             // ARRAT DEI CONTATTI
             contacts: [
                 {
@@ -208,7 +209,39 @@ createApp({
         viewLastMessage(index){
             return this.contacts[index].messages[this.contacts[index].messages.length -1].message.slice(0,30) + " " + "...";
         },
+
+        // FUNZIONE DI RISPOSTA AUTOMATICA AD UN NUOVO MESSAGGIO
+        responseMessage() {
+            const responses = ['Ok', 'Ok, ma non insistere', 'Non disturbare!', 'Hai sbagliato chat.'];
+            let i = Math.floor(Math.random() * responses.length);
+            return responses[i];
+        },
         
+        // FUNZIONE PER SCRIVERE UN NUOVO MESSAGGIO
+        addMessage() {
+            let obj = {
+                date: "20:15",
+                message: this.new_message,
+                status: "sent",
+            }
+            // VARIABILE PER LA RISPOSTA AUTOMATICA
+            let response = {
+                date: '',
+                message: this.responseMessage(),
+                status: 'received',
+            }
+            // CONDIZIONE PER STABILIRE UN NUMERO MINIMO DI CARATTERI INSERITI PER POTER CLICCARE INVIO
+            if (obj.message.length > 0){
+                this.contacts[this.currentContact].messages.push(obj);
+                // TIMER DI 1 SECONDO PER LA RISPOSTA AUTOMATICA
+                setTimeout(() => {
+                    response.date = "20:16";
+                    this.contacts[this.currentContact].messages.push(response);
+                }, 1000);
+    
+                this.new_message = '';
+            }
+        },
     }
 
     // CHIUSURA createApp CON .MOUNT("ID")
