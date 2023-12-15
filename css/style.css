@@ -3,3 +3,90 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+/* BODY */
+body{
+    background: linear-gradient(to bottom, #009788 10vh, #DADBD5 10vh);
+    background-repeat: no-repeat;
+}
+
+/* HEADER */
+.header-all{
+    background-color: #EAEAEA;
+}
+
+/* IMG */
+img{
+    width: 60px;
+    border-radius: 50%;
+}
+
+/* ICONS */
+.fa-solid{
+    font-size: 20px;
+    color: gray;
+}
+
+.fa-bell-slash{
+    color: #8EDAFC;
+    background-color: white;
+    border-radius: 50%;
+    padding: 10px;
+}
+/* MAIN */
+main {
+    margin-top: 10px;
+    height: 99vh;
+}
+
+.bg-blue-notifica{
+    background-color: #8EDAFC;
+}
+
+
+
+/* CONTAINER CONTACT & MESSAGE */
+.contact-message-container {
+    margin: 10px auto;
+    background-color: white;
+}
+
+.message-container{
+    background-image: url(../img/mine.png);
+    background-position: cover;
+    height: calc(100% - 150px);
+}
+
+/************ MESSAGES *****************/
+/* ADD MESSAGE */
+.add-message{
+    background-color: #EAEAEA;
+}
+
+/* LAST MESSAGE */
+.last-message{
+    color: gray;
+}
+
+/* SENT MESSAGE */
+.sent{
+    background-color: #D5F9BA;
+    border-radius: 10px;
+}
+
+/* RECEIVED MESSAGE */
+.received{
+    background-color: white;
+}
+
+
+/* SWITCH BG COLOR */
+.bg-grey {
+    background-color: rgba(222, 222, 222, 0.756);
+    border-radius: 2px;
+}
+
+/* CURSOR POINTER */
+.cursor-pointer {
+    cursor: pointer;
+}

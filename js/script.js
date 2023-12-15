@@ -6,7 +6,10 @@ createApp({
     // DEFINISCO IL METODO data () NEL QUALE INSERIRO' UN RETURN
     data() {
         return {
-
+            img_profile: "./img/avatar_io.png",
+            name_profile: "Dorin",
+            currentContact: 0,
+            activeChat: 0,
             // ARRAT DEI CONTATTI
             contacts: [
                 {
@@ -184,15 +187,25 @@ createApp({
                             message: 'OK!!',
                             status: 'received'
                         }
+                    // Chiusura ultimo array dei messaggi
                     ],
+                // Chiusura ultimo oggetto dell'array contatti
                 }
+            // Chiusura array contatti
             ]
+        // Chiusura return
         }
+    // Chiusura data
     },
 
     // FUNZIONI
     methods: {
-
+        showChat(index){
+            this.activeChat = index;
+        },
+        viewLastMessage(index){
+            return this.contacts[index].messages[this.contacts[index].messages.length -1].message.slice(0,30) + " " + "...";
+        },
     }
 
     // CHIUSURA createApp CON .MOUNT("ID")

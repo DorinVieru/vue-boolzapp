@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Slider</title>
+    <title>Boolzap</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
         integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -19,10 +19,125 @@
     <div id="app">
 
         <!-- CONTAINER CENTRALE -->
-        <div class="container">
-            <div class="row">
+        <!-- MAIN -->
+        <main>
+            <div class="container">
+                <div class="row">
+
+                    <!-- COL CONTATTI SX -->
+                    <div class="col-4 contact-message-container px-0">
+        
+                        <!-- CONTAINER CONTATTI -->
+                        <!-- HEADER SX -->
+                        <div class="header-all d-flex align-items-center justify-content-between">
+                            <!-- IMMAGINE, NOME UTENTE E ICONE -->
+                            <div class="d-flex align-items-center p-2">
+                                <img :src="img_profile" :alt="name_profile">
+                                <h3 class="px-3">{{ name_profile }}</h3>
+                            </div>
+                            <div>
+                                <ul class="list-unstyled d-flex pt-3 px-3">
+                                    <li><i class="fa-solid fa-circle-notch cursor-pointer"></i></li>
+                                    <li class="px-3"><i class="fa-solid fa-message cursor-pointer"></i></li>
+                                    <li><i class="fa-solid fa-ellipsis-vertical cursor-pointer"></i></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- NOTIFICHE E INPUT RICERCA -->
+                        <div class=" d-flex bg-blue-notifica p-3 align-items-center">
+                            <div>
+                                <i class="fa-solid fa-bell-slash"></i>
+                            </div>
+                            <div>
+                                <span class="fw-bolder px-2">Ricevi notifiche di nuovi messaggi</span>
+                                <p class="cursor-pointer text-decoration-underline mb-0 px-2">Attiva notifiche desktop</p>
+                            </div>
+                        </div>
+                        <!-- CAMPO INPUT DI FILTRAGGIO -->
+                        <div class="input-group mt-1 mb-3">
+                            <span class="input-group-text"><i class="fa-solid fa-magnifying-glass"></i></span>
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="floatingInputGroup1" placeholder="Cerca o inizia una nuova chat">
+                                <label for="floatingInputGroup1">Cerca o inizia una nuova chat</label>
+                            </div>
+                        </div>
+
+                        <!-- LISTA CONTATTI -->
+                        <div>
+                            <!-- LISTA VERA E PRORPIA -->
+                            <ul class="list-unstyled" v-for="(contact, index) in contacts">
+                                <li @click="showChat(index)">
+        
+                                    <!-- CORPO DELLA LISTA -->
+                                    <div class="d-flex px-3 py-1 cursor-pointer align-items-center" :class="currentContact == index ? 'active bg-grey' : ''">
+        
+                                        <!-- TESTO LISTA CONTATTI -->
+                                        <div>
+                                            <img :src="contact.avatar" :alt="contact.name"> 
+                                        </div>
+                                        <div class="px-2">
+                                            <span class="fw-semibold">{{ contact.name }}</span>
+                                            <p class="last-message">{{ viewLastMessage(index) }}</p>
+                                        </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- COL MESSAGGI DX -->
+                    <div class="col-8 contact-message-container px-0">
+
+                        <!-- HEADER DX -->
+                        <div class="header-all d-flex align-items-center justify-content-between">
+                            <!-- IMMAGINE, NOME CONTATTO E ICONE -->
+                            <div class="d-flex align-items-center p-2">
+                                <img :src="img_profile" :alt="name_profile">
+                                <h3 class="px-3">{{ name_profile }}</h3>
+                            </div>
+                            <div>
+                                <ul class="list-unstyled d-flex pt-3 px-3">
+                                    <li><i class="fa-solid fa-magnifying-glass cursor-pointer"></i></li>
+                                    <li class="px-3"><i class="fa-solid fa-paperclip cursor-pointer"></i></li>
+                                    <li><i class="fa-solid fa-ellipsis-vertical cursor-pointer"></i></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- CONTAINER MESSAGE -->
+                        <div class="message-container">
+                            <div class="message" 
+                                v-for="(message, index) in contacts[currentContact].messages" 
+                                :key="message.date" 
+                                :class="{ 'sent': message.status === 'sent', 'received': message.status === 'received'}">
+                                <p class="message-text">{{ message.message }}</p>
+                                <p class="message-date">{{ message.date }}</p>
+                            </div>
+                            <div class="message-received">
+
+                            </div>
+                        </div>
+                        <!-- SEZIONE PER SCRIVERE NUOVI MESSAGGGI -->
+                        <div class="add-message d-flex">
+                            <div class="container py-3">
+                                <div class="row align-items-center">
+                                    <div class="col-1 pe-0 text-center">
+                                        <i class="fa-solid fa-face-smile"></i>
+                                    </div>
+                                    <div class="col-10">
+                                        <!-- CAMPO INPUT -->
+                                        <input type="text" class="form-control" placeholder="Scrivi un nuovo messaggio">
+                                    </div>
+                                    <div class="col-1 ps-0 text-center">
+                                        <i class="fa-solid fa-microphone"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
+        </main>
 
     </div>
 
