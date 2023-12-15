@@ -24,7 +24,7 @@
             <div class="container">
                 <div class="row">
 
-                    <!-- COL CONTATTI SX -->
+                    <!-------- COL CONTATTI SX -------->
                     <div class="col-4 contact-message-container px-0">
         
                         <!-- CONTAINER CONTATTI -->
@@ -66,8 +66,9 @@
                         <!-- LISTA CONTATTI -->
                         <div>
                             <!-- LISTA VERA E PRORPIA -->
-                            <ul class="list-unstyled" v-for="(contact, index) in contacts">
-                                <li @click="showChat(index)">
+                            <ul class="list-unstyled">
+                                <li v-for="(contact, index) in contacts" 
+                                    @click="showChat(index)">
         
                                     <!-- CORPO DELLA LISTA -->
                                     <div class="d-flex px-3 py-1 cursor-pointer align-items-center" :class="currentContact == index ? 'active bg-grey' : ''">
@@ -85,15 +86,15 @@
                         </div>
                     </div>
 
-                    <!-- COL MESSAGGI DX -->
+                    <!-------- COL MESSAGGI DX --------->
                     <div class="col-8 contact-message-container px-0">
 
                         <!-- HEADER DX -->
                         <div class="header-all d-flex align-items-center justify-content-between">
                             <!-- IMMAGINE, NOME CONTATTO E ICONE -->
                             <div class="d-flex align-items-center p-2">
-                                <img :src="img_profile" :alt="name_profile">
-                                <h3 class="px-3">{{ name_profile }}</h3>
+                                <img :src="contacts[currentContact].avatar" :alt="contacts[currentContact].name">
+                                <h3 class="px-3">{{ contacts[currentContact].name }}</h3>
                             </div>
                             <div>
                                 <ul class="list-unstyled d-flex pt-3 px-3">
@@ -105,22 +106,25 @@
                         </div>
 
                         <!-- CONTAINER MESSAGE -->
-                        <div class="message-container">
-                            <div class="message" 
+                        <div class="chat-container">
+                            <div class="message d-flex" 
                                 v-for="(message, index) in contacts[currentContact].messages" 
                                 :key="message.date" 
-                                :class="{ 'sent': message.status === 'sent', 'received': message.status === 'received'}">
-                                <p class="message-text">{{ message.message }}</p>
-                                <p class="message-date">{{ message.date }}</p>
-                            </div>
-                            <div class="message-received">
-
+                                :class="message.status === 'sent' ? 'sent': 'received'">
+                                <!-- MESSAGE -->
+                                <div class="col-11 mb-3" v-text="message.message">
+                                </div>
+                                <!-- DATE/HOUR -->
+                                <div class="message-date mb-0 d-flex align-items-end justify-content-between col-1" v-text="message.date">
+                                </div>
                             </div>
                         </div>
+
                         <!-- SEZIONE PER SCRIVERE NUOVI MESSAGGGI -->
                         <div class="add-message d-flex">
                             <div class="container py-3">
                                 <div class="row align-items-center">
+                                    <!-- ICON SMILE -->
                                     <div class="col-1 pe-0 text-center">
                                         <i class="fa-solid fa-face-smile"></i>
                                     </div>
@@ -128,6 +132,7 @@
                                         <!-- CAMPO INPUT -->
                                         <input type="text" class="form-control" placeholder="Scrivi un nuovo messaggio">
                                     </div>
+                                    <!-- ICON MICROPHONE -->
                                     <div class="col-1 ps-0 text-center">
                                         <i class="fa-solid fa-microphone"></i>
                                     </div>
