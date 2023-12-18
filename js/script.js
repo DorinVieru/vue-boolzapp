@@ -6,12 +6,21 @@ createApp({
     // DEFINISCO IL METODO data () NEL QUALE INSERIRO' UN RETURN
     data() {
         return {
+            ///////// IMG E NOME PROFILO PRINCIPALE
             img_profile: "./img/avatar_io.png",
             name_profile: "Dorin",
+            ///////// DEFINISCO VARIABILE PER STABILIRE IL CONTATTO ATTIVO
             currentContact: 0,
+            ///////// DEFINISCO VARIABILE PER INSERIRE UN NUOVO MESSAGGIO
             new_message: "",
+            ///////// DEFINISCO VARIABILE PER EFFETTUARE UNA RICESCA TRA I CONTATTI
             search: "",
-            // ARRAT DEI CONTATTI
+            ///////// DEFINISCO OGGETTO PER IL DROPDOWN MENU
+            toggle: {
+                visible: false,
+                index: false
+            },
+            ///////// ARRAT DEI CONTATTI
             contacts: [
                 {
                     // DETTAGLI CONTATTO
@@ -23,17 +32,17 @@ createApp({
                         {
                             date: '15:30',
                             message: 'Hai portato a spasso il cane?',
-                            status: 'sent'
+                            status: 'sent',
                         },
                         {
                             date: '15:50',
                             message: 'Ricordati di stendere i panni',
-                            status: 'sent'
+                            status: 'sent',
                         },
                         {
                             date: '16:15',
                             message: 'Tutto fatto!',
-                            status: 'received'
+                            status: 'received',
                         }
                     ],
                 },
@@ -47,17 +56,17 @@ createApp({
                         {
                             date: '16:30',
                             message: 'Ciao come stai?',
-                            status: 'sent'
+                            status: 'sent',
                         },
                         {
                             date: '16:30',
                             message: 'Bene grazie! Stasera ci vediamo?',
-                            status: 'received'
+                            status: 'received',
                         },
                         {
                             date: '16:35',
                             message: 'Mi piacerebbe ma devo andare a fare la spesa.',
-                            status: 'sent'
+                            status: 'sent',
                         }
                     ],
                 },
@@ -71,17 +80,17 @@ createApp({
                         {
                             date: '10:10',
                             message: 'La Marianna va in campagna',
-                            status: 'received'
+                            status: 'received',
                         },
                         {
                             date: '10:20',
                             message: 'Sicuro di non aver sbagliato chat?',
-                            status: 'sent'
+                            status: 'sent',
                         },
                         {
                             date: '16:15',
                             message: 'Ah scusa!',
-                            status: 'received'
+                            status: 'received',
                         }
                     ],
                 },
@@ -95,12 +104,12 @@ createApp({
                         {
                             date: '15:30',
                             message: 'Lo sai che ha aperto una nuova pizzeria?',
-                            status: 'sent'
+                            status: 'sent',
                         },
                         {
                             date: '15:50',
                             message: 'Si, ma preferirei andare al cinema',
-                            status: 'received'
+                            status: 'received',
                         }
                     ],
                 },
@@ -114,12 +123,12 @@ createApp({
                         {
                             date: '15:30',
                             message: 'Ricordati di chiamare la nonna',
-                            status: 'sent'
+                            status: 'sent',
                         },
                         {
                             date: '15:50',
                             message: 'Va bene, stasera la sento',
-                            status: 'received'
+                            status: 'received',
                         }
                     ],
                 },
@@ -133,17 +142,17 @@ createApp({
                         {
                             date: '15:30',
                             message: 'Ciao Claudia, hai novità?',
-                            status: 'sent'
+                            status: 'sent',
                         },
                         {
                             date: '15:50',
                             message: 'Non ancora',
-                            status: 'received'
+                            status: 'received',
                         },
                         {
                             date: '15:51',
                             message: 'Nessuna nuova, buona nuova',
-                            status: 'sent'
+                            status: 'sent',
                         }
                     ],
                 },
@@ -157,12 +166,12 @@ createApp({
                         {
                             date: '15:30',
                             message: 'Fai gli auguri a Martina che è il suo compleanno!',
-                            status: 'sent'
+                            status: 'sent',
                         },
                         {
                             date: '15:50',
                             message: 'Grazie per avermelo ricordato, le scrivo subito!',
-                            status: 'received'
+                            status: 'received',
                         }
                     ],
                 },
@@ -176,17 +185,17 @@ createApp({
                         {
                             date: '15:30',
                             message: 'Ciao, andiamo a mangiare la pizza stasera?',
-                            status: 'received'
+                            status: 'received',
                         },
                         {
                             date: '15:50',
                             message: 'No, l\'ho già mangiata ieri, ordiniamo sushi!',
-                            status: 'sent'
+                            status: 'sent',
                         },
                         {
                             date: '15:51',
                             message: 'OK!!',
-                            status: 'received'
+                            status: 'received',
                         }
                     // Chiusura ultimo array dei messaggi
                     ],
@@ -199,7 +208,7 @@ createApp({
     // Chiusura data
     },
 
-    // FUNZIONI
+    /////////// FUNZIONI
     methods: {
         // FUNZIONE PER CLICCARE SU OGNI CONTATTO E MOSTARRE I MESSAGGI CON LUI
         showChat(index){
@@ -208,7 +217,10 @@ createApp({
 
         // FUNZIONE PER MOSTRARE IN ANTEPRIMA L'ULTIMO MESSAGGIO
         viewLastMessage(index){
-            return this.contacts[index].messages[this.contacts[index].messages.length -1].message.slice(0,30) + " " + "...";
+            if(this.contacts[index].messages.length > 0){
+                return this.contacts[index].messages[this.contacts[index].messages.length -1].message.slice(0,25) + " " + "...";
+            }
+            
         },
 
         // FUNZIONE DI RISPOSTA AUTOMATICA AD UN NUOVO MESSAGGIO
@@ -220,14 +232,17 @@ createApp({
         
         // FUNZIONE PER SCRIVERE UN NUOVO MESSAGGIO
         addMessage() {
+            // VARIABILE PER INSERIRE LA DATA E L'ORA AGGIORNATA
+            const currentDate = luxon.DateTime.local().toFormat('HH:mm');
+
             let obj = {
-                date: "20:15",
+                date: currentDate,
                 message: this.new_message,
                 status: "sent",
             }
             // VARIABILE PER LA RISPOSTA AUTOMATICA
             let response = {
-                date: '',
+                date: currentDate,
                 message: this.responseMessage(),
                 status: 'received',
             }
@@ -236,7 +251,7 @@ createApp({
                 this.contacts[this.currentContact].messages.push(obj);
                 // TIMER DI 1 SECONDO PER LA RISPOSTA AUTOMATICA
                 setTimeout(() => {
-                    response.date = "20:16";
+                    response.date = currentDate;
                     this.contacts[this.currentContact].messages.push(response);
                 }, 1000);
     
@@ -254,6 +269,45 @@ createApp({
                     element.visible = false;
                 }
             });
+        },
+
+        // FUNZIONE PER VISUALIZZARE L'ORA DELL'ULTIMO MESSAGGIO INVIATO E RICEVUTO
+        lastDate(index) {
+            const update_date = this.contacts[index].messages[this.contacts[index].messages.length - 1]
+
+            if (this.contacts[index].messages.length > 0) {
+                return update_date.date
+            }
+        },
+
+        // FUNZIONE PER VISUALIZZARE DATA E ORA DI ULTIMO ACCESSO
+        lastAccess() {
+            const obj_date = this.contacts[this.currentContact].messages;
+            const update_date = obj_date[obj_date.length - 1];
+
+            if (obj_date.length > 0) {
+                if (update_date.status == 'received' || update_date.status == 'sent') {
+                    return `Ultimo acceso effettuato alle ${update_date.date}`;
+                }
+            }
+        },
+
+        // FUNZIONE PER MOSTRARE IL DROPDOWN MENU
+        showDropdown(index) {
+            if (this.toggle.visible != false && this.toggle.index != index) {
+                this.toggle.visible = false;
+                this.toggle.index = false;
+            }
+            this.toggle.visible = this.toggle.visible ? false : true
+            this.toggle.index = index;
+        },
+
+        // FUNZIONE PER RIMUOVERE UN MESSAGGIO
+        deleteMessage(index) {
+            let confirmation = confirm("Sei sicuro di voler cancellare questo messaggio?")
+            if (confirmation) {
+                this.contacts[this.currentContact].messages.splice(index, 1);
+            }
         },
     }
 

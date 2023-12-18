@@ -59,6 +59,8 @@ main {
 .contact-message-container {
     margin: 10px auto;
     background-color: white;
+    min-height: 850px;
+    max-height: 900px;
 }
 
 .chat-container{
@@ -115,4 +117,31 @@ main {
 /* CURSOR POINTER */
 .cursor-pointer {
     cursor: pointer;
+}
+
+/********* MODAL DROPDOWN DELETE MESSAGE **********/
+.my-dropdown {
+    border: 1px solid #EAEAEA;
+    border-radius: 5px;
+    position: absolute;
+    background-color: #FFFFFF;
+    margin-left: 100px;
+}
+
+.fa-angle-down {
+    font-size: 15px;
+    text-align: right;
+}
+
+.my-dropdown li {
+    padding: 10px;
+    border-bottom: 1px solid #EAEAEA;
+}
+
+.my-dropdown li:hover {
+    background-color: #EAEAEA;
+}
+
+.my-dropdown a {
+    color: black;
 }
